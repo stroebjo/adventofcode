@@ -8,16 +8,23 @@ namespace Day7
     {
         static void Main(string[] args)
         {
-            A();
-            B();
+            var pos = ReadNumbers(@"input.txt");
+
+            Console.WriteLine("brute force: {0}", A(pos));
+            Console.WriteLine("mean: {0}", A2(pos));
+            
+            B(pos);
         }
 
-        static void A()
-        {
-            string[] lines = System.IO.File.ReadLines(@"input.txt").ToArray();
-            int[] pos = lines[0].Split(",").Select(int.Parse).ToArray();
 
-            var min = pos.Min();
+        private static int[] ReadNumbers(string fileName)
+        {
+            string[] lines = System.IO.File.ReadLines(fileName).ToArray();
+            return lines[0].Split(",").Select(int.Parse).ToArray();
+        }
+        
+        static int A(int[] pos)
+        {
             var max = pos.Max();
 
             var best = int.MaxValue;
@@ -38,34 +45,26 @@ namespace Day7
                 current = 0;
             }
 
-            Console.WriteLine(best);
+            return best;
         }
         
-        static void A2()
+        static int A2(int[] pos)
         {
-            string[] lines = System.IO.File.ReadLines(@"input.txt").ToArray();
-            int[] pos = lines[0].Split(",").Select(int.Parse).ToArray();
-            
             Array.Sort(pos);
             var median = pos[pos.Length / 2];
 
             var best = 0;
-            
             for (var i = 0; i < pos.Length; i++)
             {
                 best += Math.Abs(pos[i] - median);
             }
-                
-            Console.WriteLine(best);
+
+            return best;
         }
 
-        static void B()
+        static void B(int[] pos)
         {
-            string[] lines = System.IO.File.ReadLines(@"input.txt").ToArray();
-            int[] pos = lines[0].Split(",").Select(int.Parse).ToArray();
-
             var max = pos.Max();
-
             var best = int.MaxValue;
             var current = 0;
             
