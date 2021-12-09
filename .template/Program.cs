@@ -13,7 +13,7 @@ namespace Day
 
         static void A()
         {
-            foreach (string line in System.IO.File.ReadLines(@"input.txt"))
+            foreach (string line in System.IO.File.ReadLines(@"test.txt"))
             {
 
             }
