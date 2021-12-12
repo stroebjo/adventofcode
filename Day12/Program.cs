@@ -9,14 +9,14 @@ namespace Day12
         
         private static List<KeyValuePair<string, string>> edges = new List<KeyValuePair<string, string>>();
         private static List<List<string>> solutions = new List<List<string>>();
-        
+        private static List<string> StartEnd = new List<string>() {"start", "end"};
+
         static void Main(string[] args)
         {
             LoadEdges(@"input.txt");
             A();
             B();
         }
-        
         
         private static void LoadEdges(String file)
         {
@@ -30,88 +30,45 @@ namespace Day12
 
         static void A()
         {
-            FindPath("start",  new List<string>() {"start"});
-            Console.WriteLine(solutions.Count);
+            FindPath("start",  new List<string>() {"start"}, true);
+            Console.WriteLine($"A) {solutions.Count}");
         }
-
-        static public void FindPath(string start, List<string> visited)
-        {
-            var nextEdges = edges.Where(x => x.Key.Equals(start)).Select(x => x.Value);
-
-            var spaces = "".PadRight(visited.Count);
-            
-            //Console.WriteLine($"{spaces} am at {start}, next options: {string.Join(", ", nextEdges)}");
-            
-            foreach (var e in nextEdges)
-            {
-                //Console.WriteLine($"{spaces} going to -> {e}");
-
-                var v2 = new List<string>();
-                foreach (var s in visited)
-                {
-                    v2.Add(s);
-                }
-                
-                if (e.All(char.IsLower) && v2.Contains(e))
-                {
-                    //Console.WriteLine($"{spaces} cant go to {e} />");
-                    // cant visit same small cave twice, skip this route 
-                    continue;
-                }
-                
-                v2.Add(e);
-
-                if (e.Equals("end"))
-                {
-                    solutions.Add(v2);
-                    continue;
-                }
-                
-                FindPath(e, v2);
-            }
-        }
-
+        
         static void B()
         {
             solutions = new List<List<string>>();
-            FindPathB("start", new List<string>() {"start"});
-            Console.WriteLine(solutions.Count);
+            FindPath("start", new List<string>() {"start"});
+            Console.WriteLine($"B) {solutions.Count}");
         }
         
-        static public void FindPathB(string start, List<string> visited, string smallDouble = "")
+        static public void FindPath(string start, List<string> visited, bool hasDuplicate = false)
         {
             var nextEdges = edges.Where(x => x.Key.Equals(start)).Select(x => x.Value);
 
             foreach (var e in nextEdges)
             {
-                var v2 = new List<string>();
-                foreach (var s in visited)
-                {
-                    v2.Add(s);
-                }
+                var visitedCurrent = new List<string>(visited);
                 
-                if (e.All(char.IsLower) && v2.Contains(e))
+                if (e.All(char.IsLower) && visitedCurrent.Contains(e))
                 {
-                    var nope = new List<string>() {"start", "end"};
-
-                    if (!nope.Contains(e) && smallDouble.Equals(""))
+                    if (!hasDuplicate && !StartEnd.Contains(e))
                     {
-                        v2.Add(e);
-                        FindPathB(e, v2, e);
+                        visitedCurrent.Add(e);
+                        FindPath(e, visitedCurrent, true);
                     }
                     
                     continue;
                 }
                 
-                v2.Add(e);
+                visitedCurrent.Add(e);
 
                 if (e.Equals("end"))
                 {
-                    solutions.Add(v2);
+                    solutions.Add(visitedCurrent);
                     continue;
                 }
                 
-                FindPathB(e, v2, smallDouble);
+                FindPath(e, visitedCurrent, hasDuplicate);
             }
         }
     }
