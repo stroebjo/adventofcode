@@ -212,3 +212,4 @@ cython_debug/
 
 Day08/img/*
 /Day08/day08.mp4
+Day09/*.geojson
