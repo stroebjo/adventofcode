@@ -1,0 +1,14 @@
+{
+    "author": "",
+    "name": "AoC Day",
+    "description": "",
+    "identity": "AoC.ConsoleApp.1.0",
+    "shortName": "consoleasync",
+    "tags": {
+      "language": "C#",
+      "type": "project"
+    },
+    "sourceName": "Day",
+    "symbols": {
+    }
+  }
