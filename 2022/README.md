@@ -12,18 +12,19 @@ Solutions in R:
 
 My solutions:
 
-| Day  | Language | Comment                                  |
-| ---- | -------- | ---------------------------------------- |
-| 1    | R        |                                          |
-| 2    | R        |                                          |
-| 3    | R        |                                          |
-| 4    | R        |                                          |
-| 5    | R        |                                          |
-| 6    | R        | Sliding window                           |
-| 7    | Python   |                                          |
-| 8    | Python   |                                          |
-| 9    | Python   |                                          |
-| 10   | Python   |                                          |
-| 11   | Python   | Least common multiple to reduce int size |
-| 12   | Python   | Shortest path with Dijkstra's algorithm  |
+| Day  | Language | Comment                                                      |
+| ---- | -------- | ------------------------------------------------------------ |
+| 1    | R        |                                                              |
+| 2    | R        |                                                              |
+| 3    | R        |                                                              |
+| 4    | R        |                                                              |
+| 5    | R        |                                                              |
+| 6    | R        | Sliding window                                               |
+| 7    | Python   |                                                              |
+| 8    | Python   |                                                              |
+| 9    | Python   |                                                              |
+| 10   | Python   |                                                              |
+| 11   | Python   | Least common multiple to reduce int size                     |
+| 12   | Python   | Shortest path with Dijkstra's algorithm                      |
+| 13   | Python   | Custom sorting function and `eval()`, JSON parser would be better to safegurad against [Bobby Tables](https://xkcd.com/327/). |
 
