@@ -111,4 +111,48 @@ for y in chart:
 
 print(int(steps/2))
 
+
 # -- part2 --
+chart2 = chart.copy()
+inside_count = 0
+
+for y in range(max_y):
+    for x in range(max_x):
+        if chart[y][x] == '.':
+            edges = 0
+            last_segments = []
+
+            for xt in range(x+1):
+                # is pipe segment?
+                s = chart[y][xt]
+
+                if s in REPLACE_PIPES.values():
+                    if s == '│':
+                        edges += 1
+                    elif s in ['┌', '└', '─', '┐', '┘', 'S']:
+                        last_segments.append(s)
+
+                # "finished" segment on the x-axis
+                if s in ['┐', '┘']:
+                    if len(last_segments) > 0:
+                        # todo: actually the S would need to be checked as well
+                        if '┌' in last_segments and '┘' in last_segments:
+                            edges += 1
+                        elif '└' in last_segments and '┐' in last_segments:
+                            edges += 1
+                        # cases like ┌...┐ or └...┘ don't change the count
+                        # since we neither leave nor enter the polygon
+
+                        last_segments = []
+
+            if (edges % 2) != 0:
+                chart2[y][x] = 'x'
+                inside_count += 1
+
+for y in chart2:
+    s = ""
+    for x in y:
+        s += f"{x}"
+    print(f"{s}")
+
+print(inside_count)
